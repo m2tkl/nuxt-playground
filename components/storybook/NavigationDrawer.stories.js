@@ -1,7 +1,14 @@
 import NavigationDrawer from "../NavigationDrawer"
 
 export default {
-  title: 'Navigation Drawer'
+  title: 'Navigation Drawer',
+  argTypes: {
+    items: {
+      control: {
+        type: 'object'
+      }
+    }
+  }
 }
 
 const sampleDrawerItems = [
@@ -17,22 +24,25 @@ const sampleDrawerItems = [
   },
 ]
 
-export const normal = () => ({
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { NavigationDrawer },
   template: `
-  <v-app>
-    <NavigationDrawer
-      :isOpened="drawer"
-      :items="items"
-    ></NavigationDrawer>
-  </v-app>
-  `,
-  props: {
-    drawer: {
-      default: true
-    },
-    items: {
-      default: sampleDrawerItems
-    }
-  }
+    <v-app>
+      <navigation-drawer v-bind="$props"/>
+    </v-app>
+  `
 })
+
+export const Normal = Template.bind({})
+Normal.args = {
+  isOpened: true,
+  items: sampleDrawerItems
+}
+
+export const Mini = Template.bind({})
+Mini.args = {
+  isOpened: true,
+  items: sampleDrawerItems,
+  miniVariant: true,
+}

@@ -27,7 +27,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, watch } from '@nuxtjs/composition-api'
+import {
+  computed,
+  defineComponent,
+  PropType,
+} from '@nuxtjs/composition-api'
 
 export interface DrawerItem {
   icon: string
@@ -47,11 +51,12 @@ export default defineComponent({
   props: {
     isOpened: {
       type: Boolean,
-      required: true,
+      required: false,
+      default: true,
     },
     items: {
       type: Array as PropType<DrawerItem[]>,
-      required: true,
+      required: false,
       validator: (items: Array<any>) => {
         return items.every((item) => isDrawerItem(item))
       },
@@ -59,18 +64,18 @@ export default defineComponent({
     miniVariant: {
       type: Boolean,
       required: false,
-      default: true
+      default: false,
     },
     clipped: {
       type: Boolean,
       required: false,
-      default: true
+      default: false,
     },
   },
   setup(props, { emit }) {
     const drawer = computed({
       get: () => props.isOpened,
-      set: (val) => emit('updated: NavigationDrawer isOpend ', val)
+      set: (val) => emit('updated: NavigationDrawer isOpend ', val),
     })
     return { drawer }
   },
