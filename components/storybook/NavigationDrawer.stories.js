@@ -4,9 +4,7 @@ export default {
   title: 'Navigation Drawer',
   argTypes: {
     items: {
-      control: {
-        type: 'object'
-      }
+      control: false
     }
   }
 }
