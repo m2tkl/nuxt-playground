@@ -35,6 +35,11 @@ export interface DrawerItem {
   to: string
 }
 
+/**
+ * Type check of drawer item
+ * @param item Drawer item
+ * @return validation result
+ */
 const isDrawerItem = (item: any): item is DrawerItem => {
   return (
     typeof item.icon === 'string' &&
@@ -45,11 +50,18 @@ const isDrawerItem = (item: any): item is DrawerItem => {
 
 export default defineComponent({
   props: {
+    /**
+     * The flag of drawer opening or closing.
+     * @model
+     */
     value: {
       type: Boolean,
       required: false,
       default: true,
     },
+    /**
+     * Drawer items
+     */
     items: {
       type: Array as PropType<DrawerItem[]>,
       required: false,
@@ -57,6 +69,10 @@ export default defineComponent({
         return items.every((item) => isDrawerItem(item))
       },
     },
+    /**
+     * Drawer options
+     * https://vuetifyjs.com/ja/api/v-navigation-drawer/
+     */
     miniVariant: {
       type: Boolean,
       required: false,
