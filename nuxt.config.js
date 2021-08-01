@@ -75,5 +75,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  storybook: {
+    decorators: [
+      // v-app decorator for Vuetify
+      '<v-app><story/></v-app>'
+    ]
   }
 }

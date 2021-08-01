@@ -28,9 +28,7 @@ const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { NavigationDrawer },
   template: `
-    <v-app>
-      <navigation-drawer v-bind="$props"/>
-    </v-app>
+    <navigation-drawer v-bind="$props"/>
   `
 })
 
