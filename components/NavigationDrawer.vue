@@ -27,11 +27,7 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  PropType,
-} from '@nuxtjs/composition-api'
+import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
 
 export interface DrawerItem {
   icon: string
@@ -49,7 +45,7 @@ const isDrawerItem = (item: any): item is DrawerItem => {
 
 export default defineComponent({
   props: {
-    isOpened: {
+    value: {
       type: Boolean,
       required: false,
       default: true,
@@ -74,11 +70,10 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const drawer = computed({
-      get: () => props.isOpened,
-      set: (val) => emit('updated: NavigationDrawer isOpend ', val),
+      get: () => props.value,
+      set: (val) => emit('input', val),
     })
     return { drawer }
   },
 })
 </script>
-

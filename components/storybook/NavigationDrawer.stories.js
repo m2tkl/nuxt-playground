@@ -36,13 +36,13 @@ const Template = (args, { argTypes }) => ({
 
 export const Normal = Template.bind({})
 Normal.args = {
-  isOpened: true,
+  value: true,
   items: sampleDrawerItems
 }
 
 export const Mini = Template.bind({})
 Mini.args = {
-  isOpened: true,
+  value: true,
   items: sampleDrawerItems,
   miniVariant: true,
 }
