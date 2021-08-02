@@ -1,35 +1,67 @@
 <template>
+  <!-- :mini-variant="miniVariant" -->
   <v-navigation-drawer
     v-model="drawer"
-    :mini-variant="miniVariant"
     :clipped="clipped"
     fixed
+    permanent
+    :expand-on-hover="expandOnHover"
+    :key="expandOnHover"
     app
   >
-    <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
-        router
-        exact
-      >
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
+    <v-list dense nav>
+      <v-list-item-group>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-        </v-list-item-content>
-      </v-list-item>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
     </v-list>
+
+    <v-divider></v-divider>
+
+    <template v-slot:append>
+      <v-divider></v-divider>
+
+      <v-list dense nav>
+        <v-list-item @click="toggleDrawer()">
+          <v-list-item-icon>
+            <v-icon>
+              mdi-{{ `chevron-${expandOnHover ? 'right' : 'left'}` }}
+            </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="`${expandOnHover ? 'Expand' : 'Collapse'}`"
+            />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from '@nuxtjs/composition-api'
+import {
+  computed,
+  defineComponent,
+  PropType,
+  ref,
+  watch,
+} from '@nuxtjs/composition-api'
 
-export interface DrawerItem {
+interface DrawerItem {
   icon: string
   title: string
   to: string
@@ -81,7 +113,7 @@ export default defineComponent({
     clipped: {
       type: Boolean,
       required: false,
-      default: false,
+      default: true,
     },
   },
   setup(props, { emit }) {
@@ -89,7 +121,11 @@ export default defineComponent({
       get: () => props.value,
       set: (val) => emit('input', val),
     })
-    return { drawer }
+    const expandOnHover = ref(false)
+    const toggleDrawer = () => {
+      expandOnHover.value = !expandOnHover.value
+    }
+    return { drawer, toggleDrawer, expandOnHover }
   },
 })
 </script>
