@@ -4,9 +4,9 @@
     v-model="drawer"
     :clipped="clipped"
     fixed
-    permanent
     :expand-on-hover="expandOnHover"
     :key="expandOnHover"
+    permanent
     app
   >
     <v-list dense nav>
