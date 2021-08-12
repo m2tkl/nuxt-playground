@@ -61,6 +61,11 @@ export default defineComponent({
         title: 'Inspire',
         to: '/inspire',
       },
+      {
+        icon: 'mdi-chart-bubble',
+        title: 'Counter',
+        to: '/counter',
+      },
     ]
     return {
       clipped,
