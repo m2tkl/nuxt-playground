@@ -1,7 +1,15 @@
 <template>
-  <v-menu bottom offset-y open-on-hover :close-on-content-click="false">
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn icon tile dark v-bind="attrs" v-on="on" :ripple="false">
+  <v-menu v-model="menu.isOn.value" bottom offset-y :close-on-content-click="false">
+    <template v-slot:activator="{ attrs }">
+      <v-btn
+        v-bind="attrs"
+        icon
+        tile
+        dark
+        :ripple="false"
+        :input-value="menu.isOn.value"
+        @click="menu.toggle"
+      >
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </template>
@@ -17,7 +25,7 @@
       <v-list dense style="padding: 0">
         <v-list-item dense>
           <v-list-item-action>
-            <v-switch dense v-model="darkMode"> </v-switch>
+            <v-switch dense v-model="darkMode.isOn.value"> </v-switch>
           </v-list-item-action>
           <v-list-item-title> Enable Dark Mode </v-list-item-title>
         </v-list-item>
@@ -28,16 +36,19 @@
   </v-menu>
 </template>
 
-<script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+<script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api'
+import useFlagState from '@/composables/flagState'
 
 export default defineComponent({
   setup() {
-    const darkMode = ref(false)
+    const menu = useFlagState(false)
+    const darkMode = useFlagState(false)
+
     return {
+      menu,
       darkMode,
     }
   },
 })
 </script>
-

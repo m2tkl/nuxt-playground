@@ -1,14 +1,14 @@
 <template>
-  <v-menu bottom offset-y open-on-hover>
-    <template v-slot:activator="{ on, attrs }">
+  <v-menu v-model="menu.isOn.value" bottom offset-y>
+    <template v-slot:activator="{ attrs }">
       <v-btn
+        v-bind="attrs"
         icon
         tile
         dark
         :ripple="false"
-        v-bind="attrs"
-        v-on="on"
-        active-class="red--text"
+        :input-value="menu.isOn.value"
+        @click="menu.toggle"
       >
         <v-icon>mdi-translate</v-icon>
       </v-btn>
@@ -36,8 +36,14 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import useFlagState from '@/composables/flagState'
 
 export default defineComponent({
-  setup() {},
+  setup() {
+    const menu = useFlagState(false)
+    return {
+      menu
+    }
+  },
 })
 </script>
