@@ -50,7 +50,6 @@ export default defineComponent({
     const menu = useFlagState(false)
     const darkMode = useFlagState(false)
 
-
     watch(
       darkMode.isOn,
       (newVal, oldVal) => {
