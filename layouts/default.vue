@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <navigation-drawer
       v-model="drawer"
       :items="items"
@@ -14,7 +14,6 @@
 
       <locale-menu></locale-menu>
       <account-menu></account-menu>
-
     </v-app-bar>
 
     <v-main>
@@ -39,7 +38,7 @@ export default defineComponent({
   components: {
     NavigationDrawer,
     LocaleMenu,
-    AccountMenu
+    AccountMenu,
   },
   setup() {
     const clipped = ref(false)

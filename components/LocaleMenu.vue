@@ -5,7 +5,6 @@
         v-bind="attrs"
         icon
         tile
-        dark
         :ripple="false"
         :input-value="menu.isOn.value"
         @click="menu.toggle"

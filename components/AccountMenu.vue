@@ -1,11 +1,15 @@
 <template>
-  <v-menu v-model="menu.isOn.value" bottom offset-y :close-on-content-click="false">
+  <v-menu
+    v-model="menu.isOn.value"
+    bottom
+    offset-y
+    :close-on-content-click="false"
+  >
     <template v-slot:activator="{ attrs }">
       <v-btn
         v-bind="attrs"
         icon
         tile
-        dark
         :ripple="false"
         :input-value="menu.isOn.value"
         @click="menu.toggle"
@@ -37,13 +41,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useContext, watch } from '@nuxtjs/composition-api'
 import useFlagState from '@/composables/flagState'
 
 export default defineComponent({
   setup() {
+    const app = useContext()
     const menu = useFlagState(false)
     const darkMode = useFlagState(false)
+
+
+    watch(
+      darkMode.isOn,
+      (newVal, oldVal) => {
+        app.$vuetify.theme.dark = newVal
+      },
+      { immediate: true }
+    )
 
     return {
       menu,
