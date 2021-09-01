@@ -9,7 +9,7 @@
         :input-value="menu.isOn.value"
         @click="menu.toggle"
       >
-        <v-icon>mdi-translate</v-icon>
+        <v-icon>mdi-web</v-icon>
       </v-btn>
     </template>
 
