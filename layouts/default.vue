@@ -61,9 +61,19 @@ export default defineComponent({
         to: '/inspire',
       },
       {
-        icon: 'mdi-chart-bubble',
+        icon: 'mdi-numeric',
         title: 'Counter',
         to: '/counter',
+      },
+      {
+        icon: 'mdi-message-alert-outline',
+        title: 'Modal',
+        to: '/modal',
+      },
+      {
+        icon: 'mdi-form-select',
+        title: 'form',
+        to: '/form',
       },
     ]
     return {
