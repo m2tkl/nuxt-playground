@@ -75,6 +75,11 @@ export default defineComponent({
         title: 'form',
         to: '/form',
       },
+      {
+        icon: 'mdi-form-select',
+        title: 'member',
+        to: '/member',
+      },
     ]
     return {
       clipped,
