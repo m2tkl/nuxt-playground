@@ -35,6 +35,7 @@ import LocaleMenu from '@/components/LocaleMenu.vue'
 import AccountMenu from '@/components/AccountMenu.vue'
 
 export default defineComponent({
+  middleware: 'auth',
   components: {
     NavigationDrawer,
     LocaleMenu,
@@ -50,11 +51,6 @@ export default defineComponent({
     const menu = ref(false)
     const title = 'Playground'
     const items = [
-      {
-        icon: 'mdi-apps',
-        title: 'Welcome',
-        to: '/',
-      },
       {
         icon: 'mdi-chart-bubble',
         title: 'Inspire',
@@ -76,7 +72,7 @@ export default defineComponent({
         to: '/form',
       },
       {
-        icon: 'mdi-form-select',
+        icon: 'mdi-account',
         title: 'member',
         to: '/member',
       },
