@@ -4,14 +4,22 @@
       <v-card flat outlined tile class="pa-4">
         <v-card-title class="justify-center"> Login </v-card-title>
         <v-card-text>
-          <v-text-field v-model="formState.email" label="Username"> </v-text-field>
+          <v-text-field
+            v-model="formState.email"
+            label="Username"
+            :rules="nameRules"
+            :success-messages="isSuccess"
+            class="pb-3"
+          ></v-text-field>
           <v-text-field
             v-model="formState.password"
             label="Password"
             :type="showPassword ? 'text' : 'password'"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             v-on:click:append="showPassword = !showPassword"
-            required
+            :rules="passwordRules"
+            :success-messages="validPassword"
+            class="pb-2"
           >
           </v-text-field>
         </v-card-text>
@@ -36,8 +44,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
 import { useForm } from '@/composables/useForm'
+import { isValidPassword } from '@/utils/validation'
 
 export default defineComponent({
   layout: 'entry',
@@ -47,6 +56,7 @@ export default defineComponent({
     const checkbox = ref(false)
 
     const login = () => {
+      console.log(isValidPassword(formState.password))
       const { err, message } = validateForm()
       if (err) {
         console.log(message)
@@ -54,11 +64,50 @@ export default defineComponent({
       }
     }
 
+    const isNotEmpty = (val: string) => {
+      return !!val
+    }
+
+    const lessThanEqual10 = (val: string) => {
+      return val.length <= 10
+    }
+
+    const isSuccess = computed(() => {
+      if (isNotEmpty(formState.email) && lessThanEqual10(formState.email)) {
+        return 'OK'
+      } else {
+        return null
+      }
+    })
+
+    const validPassword = computed(() => {
+      if (isNotEmpty(formState.password) && isValidPassword(formState.password)) {
+        return 'OK'
+      } else {
+        return null
+      }
+    })
+
+    const nameRules = [
+      (v: string) => isNotEmpty(v) || 'Username is required',
+      (v: string) =>
+        lessThanEqual10(v) || 'Name must be less than 10 characters.',
+    ]
+
+    const passwordRules = [
+      (v: string) => isNotEmpty(v) || 'Password is required',
+      (v: string) => isValidPassword(v) || 'Password format is invalid'
+    ]
+
     return {
       formState,
       showPassword,
       checkbox,
-      login
+      login,
+      nameRules,
+      isSuccess,
+      passwordRules,
+      validPassword
     }
   },
 })
