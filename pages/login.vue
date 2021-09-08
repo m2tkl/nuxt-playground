@@ -4,10 +4,10 @@
       <v-card flat outlined tile class="pa-4">
         <v-card-title class="justify-center"> Login </v-card-title>
         <v-card-text>
-          <v-text-field v-model="email" label="Username"> </v-text-field>
+          <v-text-field v-model="formState.email" label="Username"> </v-text-field>
           <v-text-field
+            v-model="formState.password"
             label="Password"
-            v-model="password"
             :type="showPassword ? 'text' : 'password'"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             v-on:click:append="showPassword = !showPassword"
@@ -16,7 +16,7 @@
           </v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn block tile color="primary">Login</v-btn>
+          <v-btn block tile color="primary" v-on:click="login">Login</v-btn>
         </v-card-actions>
         <v-card-text class="pl-2">
           <ul>
@@ -35,21 +35,30 @@
   </v-row>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { useForm } from '@/composables/useForm'
 
 export default defineComponent({
   layout: 'entry',
   setup() {
-    const email = ref('')
-    const password = ref('')
+    const { formState, validateForm } = useForm()
     const showPassword = ref(false)
     const checkbox = ref(false)
+
+    const login = () => {
+      const { err, message } = validateForm()
+      if (err) {
+        console.log(message)
+        return
+      }
+    }
+
     return {
-      email,
-      password,
+      formState,
       showPassword,
       checkbox,
+      login
     }
   },
 })
