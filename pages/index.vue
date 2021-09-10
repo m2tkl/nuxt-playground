@@ -1,83 +1,77 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to Nuxt playground.
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+  <v-container fluid pa-0>
+    <v-row no-gutters>
+      <v-col class="text-center" cols="12">
+        <v-parallax
+          src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+        >
+          <v-row align="end" justify="center">
+            <v-col cols="8">
+              <h1 class="text-h3 font-weight-thin mb-8">Nuxt-Playground</h1>
+              <h4 class="subheading">This is my sample application.</h4>
+            </v-col>
+          </v-row>
+          <v-row align="center" justify="center" class="mb-4">
+            <v-col>
+              <v-btn flat tile @click="login">Login</v-btn>
+            </v-col>
+          </v-row>
+        </v-parallax>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-center" cols="10" md="5">
+        <v-card class="mx-auto" max-width="400">
+          <v-img
+            class="white--text align-end"
+            height="200px"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
           >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
+            <v-card-title>Top 10 Australian beaches</v-card-title>
+          </v-img>
+
+          <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
+
+          <v-card-text class="text--primary">
+            <div>Whitehaven Beach</div>
+
+            <div>Whitsunday Island, Whitsunday Islands</div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn color="orange" text> Share </v-btn>
+
+            <v-btn color="orange" text> Explore </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+      <v-col class="text-center" cols="10" md="5">
+        <v-card class="mx-auto" max-width="400">
+          <v-img
+            class="white--text align-end"
+            height="200px"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
           >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/login">gest login</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+            <v-card-title>Top 10 Australian beaches</v-card-title>
+          </v-img>
+
+          <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
+
+          <v-card-text class="text--primary">
+            <div>Whitehaven Beach</div>
+
+            <div>Whitsunday Island, Whitsunday Islands</div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn color="orange" text> Share </v-btn>
+
+            <v-btn color="orange" text> Explore </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -89,7 +83,10 @@ export default defineComponent({
   setup({ store }: Context) {
     const router = useRouter()
     const login = () => {
-      router.push('/inspire')
+      router.push('/login')
+    }
+    return {
+      login,
     }
   },
 })
