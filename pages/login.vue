@@ -46,7 +46,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  computed,
+  useRouter,
+} from '@nuxtjs/composition-api'
 import { useForm } from '@/composables/useForm'
 import { isValidPassword } from '@/utils/validation'
 
@@ -56,6 +61,7 @@ export default defineComponent({
     const { formState, validateForm } = useForm()
     const showPassword = ref(false)
     const checkbox = ref(false)
+    const router = useRouter()
 
     const login = () => {
       console.log(isValidPassword(formState.password))
@@ -64,6 +70,7 @@ export default defineComponent({
         console.log(message)
         return
       }
+      router.push('/inspire')
     }
 
     const isNotEmpty = (val: string) => {

@@ -42,7 +42,7 @@ export default defineComponent({
     AccountMenu,
   },
   setup() {
-    const clipped = ref(false)
+    const clipped = ref(true)
     const drawer = ref(true)
     const miniVariant = ref(false)
     const fixed = ref(false)
@@ -68,14 +68,19 @@ export default defineComponent({
       },
       {
         icon: 'mdi-form-select',
-        title: 'form',
+        title: 'Form',
         to: '/form',
       },
       {
         icon: 'mdi-account',
-        title: 'member',
+        title: 'Member',
         to: '/member',
       },
+      {
+        icon: 'mdi-newspaper-variant-multiple',
+        title: 'Articles',
+        to: '/articles'
+      }
     ]
     return {
       clipped,

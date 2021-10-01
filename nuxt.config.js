@@ -30,9 +30,10 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  // plugins: [
-  //   '@/plugins/vuetify',
-  // ],
+  plugins: [
+    '@/plugins/repository.ts',
+    '@/plugins/axios.ts'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -69,5 +70,5 @@ export default {
       // v-app decorator for Vuetify
       '<v-app><story/></v-app>'
     ]
-  }
+  },
 }
