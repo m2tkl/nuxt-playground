@@ -2,7 +2,7 @@ import { Inject, NuxtApp } from '@nuxt/types/app'
 import {
   apiRepositoryFactory,
   Repositories,
-} from '~/factories/apiRepositoryFactory'
+} from '~/composables/factories/apiRepositoryFactory'
 
 
 export default ({ app }: { app: NuxtApp }, inject: Inject) => {

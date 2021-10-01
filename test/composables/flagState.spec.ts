@@ -1,4 +1,4 @@
-import useFlagState from '@/composables/flagState'
+import useFlagState from '~/composables/hooks/flagState'
 
 describe('flagState.spec.ts', () => {
   it('初期値がセットできる', () => {

@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import Modal from '@/components/Modal.vue'
-import useModal from '@/composables/useModal'
+import useModal from '~/composables/hooks/useModal'
 
 export default defineComponent({
   components: {

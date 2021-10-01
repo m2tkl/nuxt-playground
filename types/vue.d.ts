@@ -1,6 +1,6 @@
 import {
   Repositories,
-} from "~/factories/apiRepositoryFactory";
+} from "~/composables/factories/apiRepositoryFactory";
 
 
 declare module '@nuxt/types' {

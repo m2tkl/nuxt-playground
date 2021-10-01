@@ -52,7 +52,7 @@ import {
   computed,
   useRouter,
 } from '@nuxtjs/composition-api'
-import { useForm } from '@/composables/useForm'
+import { useForm } from '~/composables/hooks/useForm'
 import { isValidPassword } from '@/utils/validation'
 
 export default defineComponent({

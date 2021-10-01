@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { defineComponent, useContext, watch } from '@nuxtjs/composition-api'
-import useFlagState from '@/composables/flagState'
+import useFlagState from '~/composables/hooks/flagState'
 
 export default defineComponent({
   setup() {

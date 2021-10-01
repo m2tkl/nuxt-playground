@@ -1,5 +1,5 @@
-import { ArticlesRepository } from '~/repositories/articlesRepository'
-import { UserRepository } from '~/repositories/userRepository'
+import { ArticlesRepository } from '~/composables/repositories/articlesRepository'
+import { UserRepository } from '~/composables/repositories/userRepository'
 
 export interface Repositories {
   articles: typeof ArticlesRepository
