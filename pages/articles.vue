@@ -1,14 +1,17 @@
 <template>
   <section>
     <h2>Articles</h2>
-    <ul v-for="(article, index) in state.articles" :key="index">
-      <li>{{ article }}</li>
-    </ul>
+    <div v-if="!loading">
+      <ul v-for="(article, index) in state.articles" :key="index">
+        <li>{{ article }}</li>
+      </ul>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, useContext } from '@nuxtjs/composition-api'
+import { useApi } from '@/composables/hooks/useApi'
 
 export default defineComponent({
   setup() {
@@ -16,18 +19,29 @@ export default defineComponent({
       articles: [] as Array<Object>,
     })
     const { app } = useContext()
-    const articleRepository = app.$repositories('articles')
-    const userRepository = app.$repositories('user')
 
-    const get = async () => {
-      const response = await articleRepository.postMessage()
-      state.articles = response
+    const { handleApi, loading, error } = useApi(async () => {
+      return await app.$repositories('articles').get()
+    })
+
+    const loadArticles = async () => {
+      const response = await handleApi()
+
+      console.log('error: ', error.value)
+      if (error.value) {
+        return
+      }
+
+      if (response) {
+        state.articles = response
+      }
     }
 
-    get()
+    loadArticles()
 
     return {
       state,
+      loading,
     }
   },
 })
