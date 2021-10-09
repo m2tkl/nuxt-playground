@@ -5,7 +5,7 @@
 
       <v-btn v-on:click="openModal">open</v-btn>
 
-      <modal v-model="modalState">
+      <base-modal v-model="modalState">
         <v-card>
           <v-card-title class="text-h5 grey lighten-2">
             Privacy Policy
@@ -30,19 +30,19 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-      </modal>
+      </base-modal>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-import Modal from '@/components/Modal.vue'
+import BaseModal from '~/components/molecules/BaseModal.vue'
 import useModal from '~/composables/hooks/useModal'
 
 export default defineComponent({
   components: {
-    Modal,
+    BaseModal,
   },
   setup() {
     const { modalState, openModal, closeModal } = useModal()
