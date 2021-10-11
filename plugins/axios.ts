@@ -1,10 +1,9 @@
 import { NuxtApp } from '@nuxt/types/app'
 
-const baseUrl = 'http://localhost:3001'
+const BASE_URL = 'http://localhost:3001'
 
 export default ({ app }: { app: NuxtApp }) => {
-
-  app.$axios.setBaseURL(baseUrl)
+  app.$axios.setBaseURL(BASE_URL)
 
   app.$axios.onRequest((config) => {
     console.log(config)
@@ -15,7 +14,9 @@ export default ({ app }: { app: NuxtApp }) => {
   })
 
   app.$axios.onError((e) => {
-    console.log(e.response)
+    if (app.$axios.isCancel(e)) {
+      return;
+    }
+    console.log(e)
   })
-
 }

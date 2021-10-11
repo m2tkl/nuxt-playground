@@ -1,8 +1,9 @@
 <template>
   <section>
     <h2>Articles</h2>
+    <button @click="loadArticles">Get articles</button>
     <div v-if="!loading">
-      <ul v-for="(article, index) in state.articles" :key="index">
+      <ul v-for="(article, index) in articles" :key="index">
         <li>{{ article }}</li>
       </ul>
     </div>
@@ -10,38 +11,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, useContext } from '@nuxtjs/composition-api'
-import { useApi } from '@/composables/hooks/useApi'
+import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+import { useArticles } from '@/composables/hooks/useArticles'
+import { useCancelToken } from '@/composables/hooks/useCancelToken'
 
 export default defineComponent({
   setup() {
-    const state = reactive({
-      articles: [] as Array<Object>,
-    })
     const { app } = useContext()
+    const { loading } = useArticles()
+    const { isCancel, cancelToken, cancelPreviousCall } = useCancelToken()
 
-    const { handleApi, loading, error } = useApi(async () => {
-      return await app.$repositories('articles').get()
-    })
+    const articles = ref()
 
     const loadArticles = async () => {
-      const response = await handleApi()
+      cancelPreviousCall()
 
-      console.log('error: ', error.value)
-      if (error.value) {
-        return
-      }
-
-      if (response) {
-        state.articles = response
-      }
+      articles.value = await app
+        .$repositories('articles')
+        .get({ cancelToken: cancelToken.value })
+        .catch((err) => {
+          if (isCancel(err)) {
+            console.log(err)
+            console.log('Cancel previous api call.')
+          } else {
+            console.error(err)
+          }
+        })
     }
 
-    loadArticles()
-
     return {
-      state,
+      articles,
       loading,
+      loadArticles,
     }
   },
 })

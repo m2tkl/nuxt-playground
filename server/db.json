@@ -1,6 +1,19 @@
 {
   "articles": [
-    { "id": 1, "title": "json-server", "author": "test1"},
-    { "id": 2, "title": "nuxt", "author": "test2"}
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "test1"
+    },
+    {
+      "id": 2,
+      "title": "nuxt",
+      "author": "test2"
+    },
+    {
+      "id": 3,
+      "title": "composition api",
+      "author": "etst3"
+    }
   ]
 }
