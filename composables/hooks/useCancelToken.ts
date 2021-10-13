@@ -11,6 +11,9 @@ export const useCancelToken = () => {
 
   const cancelToken = computed(() => cancelSrc.value.token)
 
+  /**
+   * Cancel axios api call which cancelToken is setted
+   */
   const cancelPreviousCall = () => {
     cancelSrc.value.cancel('Cancel previous api calling.')
     cancelSrc.value = CancelToken.source()

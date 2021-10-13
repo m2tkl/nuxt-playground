@@ -1,8 +1,9 @@
 <template>
   <section>
     <h2>Articles</h2>
-    <button @click="loadArticles">Get articles</button>
-    <div v-if="!loading">
+    <loading :loading="isLoading"/>
+    <button @click="loadArticles" :disabled="isLoading">Get articles</button>
+    <div v-if="!isLoading">
       <ul v-for="(article, index) in articles" :key="index">
         <li>{{ article }}</li>
       </ul>
@@ -14,16 +15,22 @@
 import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 import { useArticles } from '@/composables/hooks/useArticles'
 import { useCancelToken } from '@/composables/hooks/useCancelToken'
+import Loading from '@/components/molecules/Loading.vue'
 
 export default defineComponent({
+  components: {
+    Loading,
+  },
   setup() {
     const { app } = useContext()
-    const { loading } = useArticles()
     const { isCancel, cancelToken, cancelPreviousCall } = useCancelToken()
 
     const articles = ref()
 
+    const isLoading = ref(false)
     const loadArticles = async () => {
+      isLoading.value = true
+
       cancelPreviousCall()
 
       articles.value = await app
@@ -37,11 +44,14 @@ export default defineComponent({
             console.error(err)
           }
         })
+        .finally(() => {
+          isLoading.value = false
+        })
     }
 
     return {
       articles,
-      loading,
+      isLoading,
       loadArticles,
     }
   },
