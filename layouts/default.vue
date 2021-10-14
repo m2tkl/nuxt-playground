@@ -25,6 +25,7 @@
     <v-footer inset app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <overlay-in-progress />
   </v-app>
 </template>
 
@@ -33,6 +34,7 @@ import { defineComponent, ref } from '@nuxtjs/composition-api'
 import NavigationDrawer from '@/components/NavigationDrawer.vue'
 import LocaleMenu from '@/components/LocaleMenu.vue'
 import AccountMenu from '@/components/AccountMenu.vue'
+import OverlayInProgress from '~/components/OverlayInProgress.vue'
 
 export default defineComponent({
   middleware: 'auth',
@@ -40,6 +42,7 @@ export default defineComponent({
     NavigationDrawer,
     LocaleMenu,
     AccountMenu,
+    OverlayInProgress,
   },
   setup() {
     const clipped = ref(true)
@@ -79,8 +82,8 @@ export default defineComponent({
       {
         icon: 'mdi-newspaper-variant-multiple',
         title: 'Articles',
-        to: '/articles'
-      }
+        to: '/articles',
+      },
     ]
     return {
       clipped,
