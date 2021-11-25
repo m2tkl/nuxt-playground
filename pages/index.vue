@@ -3,7 +3,8 @@
     <v-row no-gutters>
       <v-col class="text-center" cols="12">
         <v-parallax
-          src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          height="400"
         >
           <v-row align="end" justify="center">
             <v-col cols="8">
@@ -13,7 +14,7 @@
           </v-row>
           <v-row align="center" justify="center" class="mb-4">
             <v-col>
-              <v-btn flat tile @click="login">Login</v-btn>
+              <v-btn tile @click="login">Login</v-btn>
             </v-col>
           </v-row>
         </v-parallax>
