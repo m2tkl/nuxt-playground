@@ -57,7 +57,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    optionsPath: './options/vuetify.ts',
+    optionsPath: './vuetify.options.ts',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
