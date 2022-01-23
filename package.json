@@ -22,7 +22,6 @@
     "@nuxt/types": "^2.15.7",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/storybook": "^4.1.1",
-    "@nuxtjs/tailwindcss": "^4.2.1",
     "@nuxtjs/vuetify": "^1.12.1",
     "@types/jest": "^27.0.0",
     "@vue/test-utils": "^1.2.1",
