@@ -14,6 +14,44 @@
 
       <locale-menu></locale-menu>
       <account-menu></account-menu>
+
+      <template v-slot:extension>
+        <v-menu
+          v-for="(navItem, i) in navItems"
+          :key="i"
+          open-on-hover
+          offset-y
+          :transition="false"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              text
+              style="text-transform: none"
+              plain
+              :ripple="false"
+            >
+              {{ navItem.title }}
+            </v-btn>
+          </template>
+          <v-list outlined dense>
+            <v-list-item-group>
+              <v-list-item
+                v-for="(item, index) in navItem.items"
+                :key="index"
+                :ripple="false"
+                router
+                :to="item.to"
+              >
+                <v-list-item-title>
+                  {{ item.title }}
+                </v-list-item-title>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-menu>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -75,16 +113,53 @@ export default defineComponent({
         to: '/form',
       },
       {
-        icon: 'mdi-account',
-        title: 'Member',
-        to: '/member',
-      },
-      {
         icon: 'mdi-newspaper-variant-multiple',
         title: 'Articles',
         to: '/articles',
       },
     ]
+
+    const componentsRoute = [
+      {
+        title: 'Login',
+        to: '/components/login',
+      },
+      {
+        title: 'Modal',
+        to: '/components/modal',
+      },
+      {
+        title: 'Inspire',
+        to: '/components/inspire',
+      },
+    ]
+
+    const appsRoute = [
+      {
+        title: 'Articles',
+        to: '/apps/articles',
+      },
+      {
+        title: 'Counter',
+        to: '/apps/counter',
+      },
+      {
+        title: 'Form',
+        to: '/apps/form',
+      },
+    ]
+
+    const navItems = [
+      {
+        title: 'Components',
+        items: componentsRoute,
+      },
+      {
+        title: 'Apps',
+        items: appsRoute,
+      },
+    ]
+
     return {
       clipped,
       drawer,
@@ -95,6 +170,8 @@ export default defineComponent({
       title,
       items,
       menu,
+      componentsRoute,
+      navItems,
     }
   },
 })
