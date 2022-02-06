@@ -35,7 +35,7 @@
               {{ navItem.title }}
             </v-btn>
           </template>
-          <v-list outlined dense>
+          <v-list outlined nav>
             <v-list-item-group>
               <v-list-item
                 v-for="(item, index) in navItem.items"
@@ -44,9 +44,12 @@
                 router
                 :to="item.to"
               >
-                <v-list-item-title>
-                  {{ item.title }}
-                </v-list-item-title>
+                <v-list-item-content>
+                  <v-list-item-title> {{ item.title }} </v-list-item-title>
+                  <v-list-item-subtitle>{{
+                    item.description
+                  }}</v-list-item-subtitle>
+                </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -123,14 +126,17 @@ export default defineComponent({
       {
         title: 'Login',
         to: '/components/login',
+        description: 'Login page component',
       },
       {
         title: 'Modal',
         to: '/components/modal',
+        description: 'Modal component',
       },
       {
         title: 'Inspire',
         to: '/components/inspire',
+        description: 'Inspire page',
       },
     ]
 
@@ -138,14 +144,17 @@ export default defineComponent({
       {
         title: 'Articles',
         to: '/apps/articles',
+        description: 'Articles page',
       },
       {
         title: 'Counter',
         to: '/apps/counter',
+        description: 'Counter page',
       },
       {
         title: 'Form',
         to: '/apps/form',
+        description: 'Form page',
       },
     ]
 
